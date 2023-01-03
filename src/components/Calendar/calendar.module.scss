@@ -1,0 +1,75 @@
+@import "../../index.scss";
+
+.calendar {
+  flex-grow: 2;
+  display: flex;
+
+  &Inner {
+    padding: 20px 15px;
+    width: 100%;
+  }
+
+  &Top {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 15px;
+
+    color: #fff;
+    font-weight: 500;
+
+    &Date {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      user-select: none;
+    }
+
+    &BtnToday {
+      background-color: #444;
+      padding: 8px 25px;
+      cursor: pointer;
+      border: none;
+      color: #fff;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      position: relative;
+
+      user-select: none;
+
+      @include animation;
+    }
+  }
+
+  &Main {
+    margin-top: 35px;
+  }
+
+  &NameOfDays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    color: #fff;
+    font-weight: 500;
+    gap: 10px;
+    margin-bottom: 10px;
+    user-select: none;
+  }
+
+  &Days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+}
+
+.arrow {
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+}

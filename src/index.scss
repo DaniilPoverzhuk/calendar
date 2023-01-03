@@ -1,0 +1,48 @@
+@import "~reset-css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap");
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1e1e1e;
+  font-family: "Montserrat", sans-serif;
+}
+
+#root {
+  width: 100%;
+  margin: 0 20px;
+}
+
+.App {
+  display: flex;
+  background-color: #27292b;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+button {
+  font-family: "Montserrat", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+@mixin animation {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    border-radius: 10px;
+    transition: all 0.4s;
+  }
+
+  &:hover::before {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
