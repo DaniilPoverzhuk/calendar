@@ -5,17 +5,15 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { months, nameOfDays } from "../../constants";
 import Day from "../Day/Day";
-import { nameOfDays } from "../../constants";
 
 function Calendar({
-  days,
-  month,
-  year,
+  numberOfDays,
+  date,
   prevMonth,
   nextMonth,
-  handlerBtnCurrentDate,
-  currentDate,
+  handlerSetCurrentDate,
 }) {
   return (
     <div className={style.calendar}>
@@ -27,8 +25,8 @@ function Calendar({
             onClick={prevMonth}
           />
           <div className={style.calendarTopDate}>
-            <div className={style.calendarTopMonth}>{month}</div>
-            <div className={style.calendarTopYear}>{year}</div>
+            <div className={style.calendarTopMonth}>{months[date.month]}</div>
+            <div className={style.calendarTopYear}>{date.year}</div>
           </div>
           <FontAwesomeIcon
             icon={faChevronRight}
@@ -37,7 +35,7 @@ function Calendar({
           />
           <button
             className={style.calendarTopBtnToday}
-            onClick={handlerBtnCurrentDate}
+            onClick={handlerSetCurrentDate}
           >
             Today
           </button>
@@ -49,14 +47,8 @@ function Calendar({
             ))}
           </ul>
           <div className={style.calendarDays}>
-            {days.map((day, index) => (
-              <Day
-                {...currentDate}
-                month={month}
-                year={year}
-                key={index}
-                day={day}
-              />
+            {numberOfDays.map((day) => (
+              <Day number={day} />
             ))}
           </div>
         </div>

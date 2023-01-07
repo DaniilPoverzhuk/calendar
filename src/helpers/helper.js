@@ -1,13 +1,21 @@
-export const getArrayOfDays = (lastDayOfMonth, firstDayOfMonth) => {
-  const result = [];
+import { months } from "../constants";
 
-  for (let i = 0; i < firstDayOfMonth - 1 ; i++) {
+export const getArrayOfDays = (startDay, endDay) => {
+  const result = [];
+  for (let i = 0; i < startDay - 1; i++) {
     result.push(null);
   }
-
-  for (let i = 1; i <= lastDayOfMonth; i++) {
+  for (let i = 1; i <= endDay; i++) {
     result.push(i);
   }
-
   return result;
 };
+
+export const isToday = (currentDate, date, number) => {
+  if (currentDate.currentDay == number && currentDate.currentMonth == months[date.month] && currentDate.currentYear == date.year) {
+    return true;
+  }
+  return false;
+}
+
+export const getCurrentDate = () => Date.now();

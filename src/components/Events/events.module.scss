@@ -14,14 +14,13 @@
   }
 
   &Inner {
-    padding: 20px 15px;
     width: 100%;
   }
 
   &Top {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    padding: 20px 15px;
     &Day {
       color: #fff;
       font-size: 30px;
@@ -55,6 +54,10 @@
         width: 100%;
       }
     }
+  }
+
+  &ListTask {
+    margin-top: 15px;
   }
 }
 

@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import Context from "../../context";
+import { isToday } from "../../helpers/helper";
+import classNames from "classnames";
 import "./day.scss";
 
-function Day({ month, year, currentDay, currentMonth, currentYear, day }) {
-  const isCurrentDat = () => {
-    if (currentDay == day && currentMonth == month && currentYear == year) {
-      return true;
-    }
-    return false;
+function Day({ number }) {
+  const { currentDate, date, setClickedDay, clickedDay, setId, id } =
+    useContext(Context);
+
+  const handlerDay = () => {
+    setId((prev) => prev + 1);
+    setClickedDay({
+      id: ++id,
+      date: { day: number, month: date.month, year: date.year },
+    });
   };
+
   return (
     <div
-      className={`item ${!day ? "hidden" : ""} ${
-        isCurrentDat() ? "currentDay" : ""
-      }`}
+      className={classNames({
+        item: true,
+        hidden: !number,
+        currentDay: isToday(currentDate, date, number),
+      })}
+      onClick={() => handlerDay()}
     >
-      {day}
+      {number}
     </div>
   );
 }
