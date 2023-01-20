@@ -8,13 +8,7 @@ import {
 import { months, nameOfDays } from "../../constants";
 import Day from "../Day/Day";
 
-function Calendar({
-  numberOfDays,
-  date,
-  prevMonth,
-  nextMonth,
-  handlerSetCurrentDate,
-}) {
+function Calendar({ days, date, prevMonth, nextMonth, handlerSetCurrentDate }) {
   return (
     <div className={style.calendar}>
       <div className={style.calendarInner}>
@@ -43,12 +37,12 @@ function Calendar({
         <div className={style.calendarMain}>
           <ul className={style.calendarNameOfDays}>
             {nameOfDays.map((day) => (
-              <li> {day} </li>
+              <li key={day}> {day} </li>
             ))}
           </ul>
           <div className={style.calendarDays}>
-            {numberOfDays.map((day) => (
-              <Day number={day} />
+            {days.map((day, idx) => (
+              <Day {...day} key={idx} />
             ))}
           </div>
         </div>

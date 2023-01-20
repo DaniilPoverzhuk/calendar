@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getArrayOfDays, getCurrentDate } from "./helpers/helper";
 import { format, getDaysInMonth, getISODay } from "date-fns";
 import Calendar from "./components/Calendar/Calendar";
@@ -6,15 +6,12 @@ import Events from "./components/Events/Events";
 import Context from "./context";
 
 function App() {
-  const [numberOfDays, setNumberOfDays] = useState([]);
-  const [id, setId] = useState(0);
+  const [days, setDays] = useState([]);
+  const [tasks, setTasks] = useState([]);
   const [clickedDay, setClickedDay] = useState({
-    id: null,
-    date: {
-      day: null,
-      month: null,
-      year: null,
-    },
+    day: null,
+    month: null,
+    year: null,
   });
   const [date, setDate] = useState({
     day: null,
@@ -26,6 +23,7 @@ function App() {
     currentMonth: null,
     currentYear: null,
   });
+  const popup = useRef(null);
 
   useEffect(() => {
     setCurrentDate({
@@ -35,12 +33,9 @@ function App() {
     });
 
     setClickedDay({
-      id,
-      date: {
-        day: +format(getCurrentDate(), "d"),
-        month: +format(getCurrentDate(), "L") - 1,
-        year: +format(getCurrentDate(), "y"),
-      },
+      day: +format(getCurrentDate(), "d"),
+      month: +format(getCurrentDate(), "L") - 1,
+      year: +format(getCurrentDate(), "y"),
     });
 
     setDate({
@@ -51,14 +46,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(clickedDay);
-  }, [clickedDay, id]);
-
-  useEffect(() => {
     const daysOfMonth = getDaysInMonth(new Date(date.year, date.month));
     const firstDayOfMonth = getISODay(new Date(date.year, date.month), "d");
 
-    setNumberOfDays(getArrayOfDays(firstDayOfMonth, daysOfMonth));
+    setDays(getArrayOfDays(firstDayOfMonth, daysOfMonth));
   }, [date.month]);
 
   const prevMonth = () => {
@@ -85,19 +76,29 @@ function App() {
     });
   };
 
+  const handlerDay = (day) => {
+    setClickedDay({ day, month: date.month, year: date.year });
+    setDays(
+      days.map((item) => {
+        if (item && item.day === day) {
+          return { ...item, status: true };
+        }
+        return { ...item, status: false };
+      })
+    );
+  };
+
   return (
     <div className="App">
-      <Context.Provider
-        value={{ currentDate, date, setClickedDay, clickedDay, setId, id }}
-      >
+      <Context.Provider value={{ currentDate, date, handlerDay, popup }}>
         <Calendar
-          numberOfDays={numberOfDays}
+          days={days}
           date={date}
           prevMonth={prevMonth}
           nextMonth={nextMonth}
           handlerSetCurrentDate={handlerSetCurrentDate}
         />
-        <Events clickedDay={clickedDay} />
+        <Events clickedDay={clickedDay} tasks={tasks} setTasks={setTasks} />
       </Context.Provider>
     </div>
   );

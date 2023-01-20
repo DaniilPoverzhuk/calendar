@@ -1,7 +1,6 @@
 .event {
   position: relative;
-  flex-grow: 2;
-  display: flex;
+  min-width: 300px;
 
   &::after {
     content: "";
@@ -14,13 +13,16 @@
   }
 
   &Inner {
-    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   &Top {
     display: flex;
     flex-direction: column;
     padding: 20px 15px;
+
     &Day {
       color: #fff;
       font-size: 30px;
@@ -30,15 +32,13 @@
 
   &AddTask {
     margin-top: 35px;
-    position: relative;
-    border-bottom: 1px solid #444;
 
     input {
       width: 100%;
-      padding: 0 0 5px 5px;
-
+      background-color: #1e1e1e;
+      border-radius: 10px;
       border: none;
-      background: none;
+      padding: 12px 15px;
 
       font-style: italic;
       font-family: "Montserrat";
@@ -49,24 +49,54 @@
       &:focus {
         outline: none;
       }
-
-      &:focus ~ .bar {
-        width: 100%;
-      }
     }
   }
 
+  &Block {
+    position: relative;
+  }
+
+  &SetTime {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
   &ListTask {
-    margin-top: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    ul {
+      height: 100%;
+      margin-top: 15px;
+    }
+  }
+
+  &SubTitle {
+    color: #656767;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0 15px;
   }
 }
 
-.bar {
+.warning {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.btnPopUp {
   position: absolute;
-  background: #fff;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  width: 0;
-  transition: 0.4s;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 5px;
+  cursor: pointer;
 }

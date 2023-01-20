@@ -1,6 +1,10 @@
 @import "~reset-css";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   min-height: 100vh;
   display: flex;
@@ -26,6 +30,9 @@ body {
 
 button {
   font-family: "Montserrat", sans-serif;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 ul {

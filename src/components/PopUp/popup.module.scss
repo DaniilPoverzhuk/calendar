@@ -1,0 +1,38 @@
+.popup {
+  &Block {
+    position: absolute;
+    top: 30px;
+    right: -20px;
+    z-index: 10;
+    background: red;
+
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    border: 3px solid #27292b;
+  }
+
+  &Item {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.4s;
+
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+
+    &Priority {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 100%;
+      margin-right: 5px;
+    }
+  }
+}

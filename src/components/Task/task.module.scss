@@ -1,0 +1,32 @@
+.task {
+  padding: 17px 15px;
+  transition: 0.4s;
+
+  &:hover {
+    background-color: #1e1e1e;
+  }
+
+  &Top {
+    display: flex;
+    align-items: center;
+  }
+
+  &Priority {
+    width: 12px;
+    height: 12px;
+    background-color: #e67b29;
+    border-radius: 100%;
+  }
+
+  &Value {
+    margin-left: 10px;
+    color: #fff;
+  }
+
+  &Bottom {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #656767;
+    font-weight: bold;
+  }
+}

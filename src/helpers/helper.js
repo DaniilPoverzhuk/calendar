@@ -6,16 +6,31 @@ export const getArrayOfDays = (startDay, endDay) => {
     result.push(null);
   }
   for (let i = 1; i <= endDay; i++) {
-    result.push(i);
+    result.push({ day: i, status: false });
   }
   return result;
 };
 
 export const isToday = (currentDate, date, number) => {
-  if (currentDate.currentDay == number && currentDate.currentMonth == months[date.month] && currentDate.currentYear == date.year) {
+  if (
+    currentDate.currentDay == number &&
+    currentDate.currentMonth == months[date.month] &&
+    currentDate.currentYear == date.year
+  ) {
     return true;
   }
   return false;
-}
+};
 
 export const getCurrentDate = () => Date.now();
+
+export const isCheck = (array, target) => {
+  for (let i = 0; i < array.length; i++) {
+    const item = array[i];
+
+    if (JSON.stringify(item.date) === JSON.stringify(target)) {
+      return true;
+    }
+  }
+  return false;
+};
