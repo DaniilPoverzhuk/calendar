@@ -7,7 +7,9 @@ import Context from "./context";
 
 function App() {
   const [days, setDays] = useState([]);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || []
+  );
   const [clickedDay, setClickedDay] = useState({
     day: null,
     month: null,
@@ -23,7 +25,6 @@ function App() {
     currentMonth: null,
     currentYear: null,
   });
-  const popup = useRef(null);
 
   useEffect(() => {
     setCurrentDate({
@@ -69,11 +70,25 @@ function App() {
   };
 
   const handlerSetCurrentDate = () => {
+    setCurrentDate({
+      currentDay: format(getCurrentDate(), "d"),
+      currentMonth: format(getCurrentDate(), "LLLL"),
+      currentYear: format(getCurrentDate(), "y"),
+    });
+
+    setClickedDay({
+      day: +format(getCurrentDate(), "d"),
+      month: +format(getCurrentDate(), "L") - 1,
+      year: +format(getCurrentDate(), "y"),
+    });
+
     setDate({
       ...date,
       month: +format(getCurrentDate(), "L") - 1,
       year: +format(getCurrentDate(), "y"),
     });
+
+    setDays(days.map((item) => ({ ...item, status: false })));
   };
 
   const handlerDay = (day) => {
@@ -90,7 +105,7 @@ function App() {
 
   return (
     <div className="App">
-      <Context.Provider value={{ currentDate, date, handlerDay, popup }}>
+      <Context.Provider value={{ currentDate, date, handlerDay }}>
         <Calendar
           days={days}
           date={date}

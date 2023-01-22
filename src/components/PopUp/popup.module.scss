@@ -1,7 +1,16 @@
 .popup {
+  &Btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    padding: 5px;
+    cursor: pointer;
+  }
+
   &Block {
     position: absolute;
-    top: 30px;
+    top: 6vh;
     right: -20px;
     z-index: 10;
     background: red;

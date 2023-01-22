@@ -34,3 +34,8 @@ export const isCheck = (array, target) => {
   }
   return false;
 };
+
+export const validTime = ({ firstTime, secondTime }) => {
+  if (+firstTime.hours <= +secondTime.hours) return true;
+  return false;
+};
