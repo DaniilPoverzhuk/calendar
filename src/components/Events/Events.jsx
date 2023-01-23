@@ -84,7 +84,6 @@ function Events({ clickedDay, tasks, setTasks }) {
       secondTime: { hours: 0, minutes: 0 },
     });
     setPriority();
-    console.log(tasks);
   };
 
   useEffect(() => {
@@ -165,7 +164,11 @@ function Events({ clickedDay, tasks, setTasks }) {
         <div className={style.eventListTask}>
           <p className={style.eventSubTitle}>Upcoming tasks</p>
           <ul>
-            {tasks[0]?.todos.length ? (
+            {!tasks.filter(
+              (task) => JSON.stringify(task.date) === JSON.stringify(clickedDay)
+            ).length ? (
+              <h3 className={style.warning}> There are no tasks</h3>
+            ) : (
               tasks
                 .filter(
                   (task) =>
@@ -179,8 +182,6 @@ function Events({ clickedDay, tasks, setTasks }) {
                     key={idx}
                   />
                 ))
-            ) : (
-              <h4 className={style.warning}>There are no tasks</h4>
             )}
           </ul>
         </div>
